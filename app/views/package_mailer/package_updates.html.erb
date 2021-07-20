@@ -1,0 +1,36 @@
+<h1>Courier App</h1>
+
+<p>Hi <%= @package.receiver_address.name %>,</p>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Tracking Id</th>
+        <th scope="col">Sender Name</th>
+        <th scope="col">Sender Mobile</th>
+        <th scope="col">Sender Address</th>
+        <th scope="col">Receiver Name</th>
+        <th scope="col">Receiver Mobile</th>
+        <th scope="col">Receiver Address</th>
+        <th scope="col">Price</th>
+        <th scope="col">Status</th>
+        <th scope="col">Payment Mode</th>
+        <th scope="col">Service Type</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row"><%= @package.tracker_id %></th>
+        <td><%= @package.sender_address.name %></td>
+        <td><%= @package.sender_address.mobile %></td>
+        <td><%= "#{@package.sender_address.district},#{@package.sender_address.state},#{@package.sender_address.country},#{@package.sender_address.pincode}" %></td>
+        <td><%= @package.receiver_address.name %></td>
+        <td><%= @package.receiver_address.mobile %></td>
+        <td><%= "#{@package.receiver_address.district},#{@package.receiver_address.state},#{@package.receiver_address.country},#{@package.receiver_address.pincode}" %></td>
+        <td><%= @package.cost %></td>
+        <td><%= @package.status.name %></td>
+        <td><%= @package.payment_mode %></td>
+        <td><%= @package.service_type.name %></td>
+    </tr>
+    </tbody>
+  </table>

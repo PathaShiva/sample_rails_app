@@ -1,0 +1,48 @@
+<%= render 'shared/courier_search' %>
+<% if logged_in? && current_user.admin? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Tracking Id</th>
+        <th scope="col">Sender Name</th>
+        <th scope="col">Sender Mobile</th>
+        <th scope="col">Sender Address</th>
+        <th scope="col">Receiver Name</th>
+        <th scope="col">Receiver Mobile</th>
+        <th scope="col">Receiver Address</th>
+        <th scope="col">Price</th>
+        <th scope="col">Status</th>
+        <th scope="col">Payment Mode</th>
+        <th scope="col">Service Type</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @packages.each do |package| %>
+        <tr>
+          <th scope="row"><%= package.tracker_id %></th>
+          <td><%= package.sender_address.name %></td>
+          <td><%= package.sender_address.mobile %></td>
+          <td><%= "#{package.sender_address.district},#{package.sender_address.state},#{package.sender_address.country},#{package.sender_address.pincode}" %></td>
+          <td><%= package.receiver_address.name %></td>
+          <td><%= package.receiver_address.mobile %></td>
+          <td><%= "#{package.receiver_address.district},#{package.receiver_address.state},#{package.receiver_address.country},#{package.receiver_address.pincode}" %></td>
+          <td><%= package.cost %></td>
+          <td><%= package.status.name %></td>
+          <td><%= package.payment_mode %></td>
+          <td><%= package.service_type.name %></td>
+          <td>
+            <%= form_with url: "/packages/search", method: :get,local: true do |form| %>
+              <div class="form-group">
+                <input hidden="true" name="tracker_id" value="<%= package.tracker_id %>">
+              </div>
+              <div class="form-group mb-0 mob-center">
+                <button class="btn btn-info mr-dist" title="Track your package" type="submit"><i class="glyphicon glyphicon-map-marker"></i> Track</button>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

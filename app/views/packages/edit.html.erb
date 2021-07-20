@@ -1,0 +1,91 @@
+<% provide(:title, 'Update Package') %>
+<h1>Update Package</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with(model: @package,url: "/packages/#{@package.tracker_id}",method: :put,local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      
+      <%= f.label "Tracking Id" %>
+      <%= f.text_field :tracker_id, class: 'form-control',readonly: true %>
+
+      <div style="display: flex">
+        <div style="width: 500px;padding: 30px">
+          <h4>Sender Address Details</h4>
+          <%= f.fields(@package.sender_address, skip_id: true) do |fields| %>
+            <%= fields.label :name %>
+            <%= fields.text_field :name, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :mobile %>
+            <%= fields.text_field :mobile, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :district %>
+            <%= fields.text_field :district, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :state %>
+            <%= fields.text_field :state, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :country %>
+            <%= fields.text_field :country, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :pincode %>
+            <%= fields.text_field :pincode, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :landmark %>
+            <%= fields.text_area :landmark, class: 'form-control',readonly: true  %>
+          <% end %>
+
+          <%= f.label :sender_email %>
+          <%= f.email_field :sender_email, class: 'form-control',readonly: true   %>
+        </div>
+        <div style="width: 500px;padding: 30px">
+         <h4>Receiver Address Details</h4>
+          <%= f.fields(@package.receiver_address, skip_id: true) do |fields| %>
+            <%= fields.label :name %>
+            <%= fields.text_field :name, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :mobile %>
+            <%= fields.text_field :mobile, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :district %>
+            <%= fields.text_field :district, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :state %>
+            <%= fields.text_field :state, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :country %>
+            <%= fields.text_field :country, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :pincode %>
+            <%= fields.text_field :pincode, class: 'form-control',readonly: true  %>
+    
+            <%= fields.label :landmark %>
+            <%= fields.text_area :landmark, class: 'form-control',readonly: true  %>
+          <% end %>
+
+          <%= f.label :sender_email %>
+          <%= f.email_field :sender_email, class: 'form-control',readonly: true   %>
+        </div>
+      </div>
+      
+      <%= f.label "Weight of Parcel (in kgs)" %>
+      <%= f.text_field :weight_of_parcel, class: 'form-control',readonly: true  %>
+      
+      <%= f.label :price %>
+      <%= f.text_field :cost, class: 'form-control',readonly: true  %>
+
+      <%= f.label :service_type %>
+      <%= f.collection_select :service_type_id, ServiceType.all,:id,:name, {},{ class: "form-control", :disabled => "disabled" } %>
+
+      <%= f.label :status %>
+      <%= f.collection_select :status_id, Status.all,:id,:name, {include_blank: true},{class: "form-control" }%>
+
+      <%= f.label :payment_mode %>
+      <%= f.text_field :payment_mode, class: 'form-control',readonly: true  %>
+
+      
+
+      <%= f.submit "Update Package", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

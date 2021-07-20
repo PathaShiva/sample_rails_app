@@ -1,0 +1,67 @@
+<%= render 'shared/courier_search' %>
+<div class="block m-b-2">
+<div class="row">
+  <div class="col-xs-12">
+    <p id="tracking-number" class="tracking-number--bar text-xs-center m-b-0"> <%= @package.tracker_id %> </p>
+  </div>
+  <div class="col-xs-12">
+    <div class="col-xs-12 courier-info media m-y-1">
+      <div class="media-left">
+      <%= link_to image_tag("courier_logo.png", alt: "Logo of Courier", width: "64", height: "64"), "/" %>
+      </div>
+      <div class="media-right">
+        <a href="/" class="link--black">
+          <h2 class="h4 notranslate">Courier Details</h2>
+        </a>
+        </a>
+      </div>
+      <% if logged_in? && current_user.admin? %>
+        <div class="media-right form-group mb-0 mob-center">
+          <a class="btn btn-info mr-dist" href="<%= "/packages/#{@package.tracker_id}/edit" %>">Change Status</a>
+        </div>
+        <div class="media-right form-group mb-0 mob-center">
+          <a class="btn btn-info mr-dist" href="<%= "/packages/#{@package.tracker_id}/package_updates/new" %>"> Add Update</a>
+        </div>
+      <% end%>
+    </div>
+  </div>
+
+  <div class="col-xs-12">
+
+    <!-- ngIf: ctrl.CheckpointsTable.AdditionalInfo -->
+
+    <!-- ngIf: !ctrl.CheckpointsTable.AdditionalInfo --><div ng-if="!ctrl.CheckpointsTable.AdditionalInfo" class="ng-scope">
+      <div class="clearfix text-xs-center tag-intransit" ng-class="ctrl.ShipmentState">
+        <div class="col-sm-12">
+          <p class="tag text-tight"><span ng-bind="ctrl.CheckpointsTable.MostRecentStatus" class="ng-binding"><%= @package.status.name %></span></p>
+        </div>
+      </div>
+    </div><!-- end ngIf: !ctrl.CheckpointsTable.AdditionalInfo -->
+  </div>
+  <% if @package_updates.present? %>
+    <% @package_updates.each_with_index do |update,i| %>
+      <div class="col-xs-12">
+        <div class="checkpoints">
+          <ul class="checkpoints__list">
+
+            <!-- ngRepeat: c in ctrl.CheckpointsTable.Checkpoints --><li class="checkpoint ng-scope" ng-repeat="c in ctrl.CheckpointsTable.Checkpoints">
+              <div class="checkpoint__time">
+                <strong class="ng-binding"></strong>
+                <div class="hint ng-binding"></div>
+              </div>
+              <div class="checkpoint__icon <%= i == 0 ? 'active' : 'intransit'%>">
+              </div>
+              <div class="checkpoint__content" style="display: flex;flex-direction: column" >
+                <strong><span ng-bind-html="c.Activity" class="ng-binding"><%= "#{update.location}" %></span> <span class="checkpoint__courier-name ng-binding">CAP</span> </strong>
+                <strong><span ng-bind-html="c.Activity" class="ng-binding"><%= "#{update.created_at.in_time_zone("Chennai").strftime("%b %-d, %Y %I:%M%p")}" %></span> </strong>
+                <div class="hint ng-binding"></div>
+              </div>
+            </li><!-- end ngRepeat: c in ctrl.CheckpointsTable.Checkpoints -->
+
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+</div>

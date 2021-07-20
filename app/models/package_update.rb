@@ -1,0 +1,2 @@
+class PackageUpdate < ApplicationRecord
+end
