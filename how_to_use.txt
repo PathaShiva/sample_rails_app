@@ -1,0 +1,28 @@
+How to use the project
+Step 1:
+Download the code from GitHub using below link
+https://github.com/PathaShiva/sample_rails_app
+
+Step 2:
+cd sample_rails_app
+
+Step 3: 
+Configure database.yml with valid details 
+username: root
+  password: password
+  host: mysql_service
+
+Step 4:
+bundle install
+
+Step 5:
+RAILS_ENV=production rails db:create db:migrate
+
+Step 6:
+RAILS_ENV=production rails s -p 3000
+(note: start the server on http://localhost:3000)
+
+Step 7:
+Navigate to http://localhost:3000 login using below credentails
+Username: shiva17595@gmail.com
+Password: welcome@123
