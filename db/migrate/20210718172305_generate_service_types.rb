@@ -1,4 +1,4 @@
-class GenerateServiceTypes < ActiveRecord::Migration[6.1]
+class GenerateServiceTypes < ActiveRecord::Migration[6.0]
   
   class ServiceTypes < ApplicationRecord
   end

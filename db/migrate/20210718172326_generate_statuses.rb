@@ -1,4 +1,4 @@
-class GenerateStatuses < ActiveRecord::Migration[6.1]
+class GenerateStatuses < ActiveRecord::Migration[6.0]
   
   class Status < ApplicationRecord
   end

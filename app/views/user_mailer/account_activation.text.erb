@@ -1,5 +1,8 @@
-Hi <%= @user.name %>,
+Courier App
+
+Hi <%= @user.name %>
 
 Welcome to the Courier App! Click on the link below to activate your account:
+<%= "http://localhost:6200/account_activations/#{@user.activation_token}/edit?email=#{@user.email}" %>
 
-<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
+click the above link to activate the account
